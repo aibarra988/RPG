@@ -1,0 +1,41 @@
+// Display the game on the page with:
+    - Hero selection screen
+    - hero portrait section
+    - fight section (attack button)
+    - list of enemies to attack
+    - events section
+
+// We need to be able to select a hero and select an enemy
+
+// when a hero is selected, all other hero characters on screen will disappear
+
+// when a hero and an enemy are selected, the game can start
+    - Otherwise, the game won't start and the attack button won't work
+
+// when the game starts, the player can attack the enemy
+
+// when the player attacks the enemy
+    - the player's attack points increase by it's baseAttackLevel
+    - the enemy will counter attack at a fixed specific number
+    - and the volley's stats will be logged to the events section
+
+
+// when an enemy dies, select the next opponent to fight and press
+// attack to start attacking
+
+// when all of the enemies on the enemy list have died
+    - Congratulate the player 
+    - display game over
+    - show the restart button
+
+// if the player dies
+    - display to the player they lost
+    - display game over
+    - show the restart button
+
+// When the restart button is pressed
+    - Clear the stats
+    - repopulate the hero selection
+    - repopulate the enemy list
+    
+

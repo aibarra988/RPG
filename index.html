@@ -1,0 +1,50 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <title>RPG</title>
+
+    <style>
+        body {
+            background-image: url(http://www.tokkoro.com/picsup/1216683-diablo-iii.jpg);
+            background-size: auto;
+            background-repeat: no-repeat;
+        }
+
+        .jumbotron {
+            margin-top: 20em;
+            opacity: .7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container jumbotron">
+        <span id="main-character"></span>
+        
+        <button id="attack">Attack</button>
+
+        <span id="enemy-character"></span>
+
+
+        <div id="avtivity-board"></div>
+
+        <div id="scoreboard">
+            <h3>Your Health</h3>
+            <span id="mc-health"></span>
+
+            <h3>Enemy's Health</h3>
+            <span id="enemy-health"></span>
+
+            <h3>Events:</h3>
+            <div id="events"></div>
+        </div>
+    </div>
+    <script type="text/javascript" src="src/game.js"></script>
+</body>
+</html>
