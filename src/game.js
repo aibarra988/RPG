@@ -5,22 +5,34 @@
  *      
  */
 
-var mainCharacterEl = $("#main-character");
-var enemyCharacterEl = $("#enemy-character");
+var heroSelectionEl = $("#hero-selection");
+var selectableHeroEls = $(".hero.selectable");
+
+var enemyListEl = $("enemy-list");
+var selectableEnemyEls = $(".enemy.selectable");
+
 var attackEl = $("#attack");
-var activityBoardEl = $("#activity-board");
+var resetEl = $("#reset");
 var eventsEl = $("#events");
+
+var mainCharacterEl = $("#main-character");
 var mcHealthEl = $("#mc-health");
+var mcNameEl = $("#mc-name");
+
+var enemyCharacterEl = $("#enemy-character");
 var enemyHealthEl = $("#enemy-health");
+var enemyNameEl = $("enemy-name");
+
 
 
 // Game class to store game state
 class Game {
-    constructor(player, enemyList) {
+    constructor(heroesList, enemyList) {
         this.player = this.setPlayer();
         this.enemy = this.setEnemy();
+        this.heroesList = heroesList;
         this.enemyList = enemyList;
-        this.gameOver = false;
+        this.state = "intro";
         this.events = [];
     }
 
@@ -32,6 +44,69 @@ class Game {
         this.enemy = enemy;
     }
 
+    _populateHeroEls(hero) {
+        $("<div class='character'>").loadTemplate("../assets/templates/character.html", {
+            name: hero.name,
+            hp: hero.hp
+        });
+    }
+
+    renderIntro() {
+        // show player list as selectable
+        var self = this;
+        this.heroesList.forEach(function(hero) {
+            self._populateHeroEls(hero);
+        });
+        // show challengers row as empty
+        
+        // hide attack and reset buttons
+        
+        // display select a character in events
+
+        // show enemy list as selectable
+
+        mcNameEl.text(game.player.name);
+        mcHealthEl.text(game.player.hp);
+
+        enemyNameEl.text(game.enemy.name);
+        enemyHealthEl.text(game.enemy.hp);
+    }
+
+    renderFightSequence() {
+        // show the player list as inactive
+
+        // hide reset button
+
+        // show attack button
+        
+        // display fight stats in events
+
+        // show enemy list as inactive
+
+    }
+
+    renderIntermission() {
+        // show the player list as inactive
+
+        // hide the reset and attack buttons
+
+        // fight outcome in events and select the next opponent
+
+        // show enemy list as active
+
+    }
+    
+    renderGameOver() {
+        // show the player list as inactive
+
+        // show the reset button
+
+        // hide the attack button
+
+        // show the outcome of the game in events and hit reset for a new game
+
+        // show enemy list as inactive
+    }
 }
 
 class Character {
@@ -86,35 +161,55 @@ class Player extends Character {
     }
 }
 
-function render() {
-    mainCharacterEl.html(mainCharacter.name);
-    mcHealthEl.html(mainCharacter.hp);
-    
-    enemyCharacterEl.html(enemyCharacter.name);
-    enemyHealthEl.html(enemyCharacter.hp);
-}
 
+// Create our characters
+var heroesList = [
+    new Player("Necromancer", 100, 10), 
+    new Player("Monk", 80, 15),
+    new Player("Druid", 120, 8)
+];
 
+var enemyList = [
+    new Enemy("Azmodan", 100, 5), 
+    new Enemy("Belial", 150, 10),
+    new Enemy("Diablo", 180, 20)
+];
 
-var mainCharacter = new Player("Abe", 100, 15);
-var enemyCharacter = new Enemy("Trump", 80, 15); 
+// Create our game
+var game = new Game(heroesList, enemyList);
 
-var game = new Game(mainCharacter, enemyCharacter);
+$(document).ready(function() {
+    // Show the initial state of the game
+    game.renderIntro();
+});
 
+selectableHeroEls.click(function(evt) {
+    // if game.state === intro && game.player doesn't exist
+        // set game.player to selected character
+        // if game.enemy and game.player exist
+});         // set game.state to 'fighting'
 
-render();
+selectableEnemyEls.click(function(){
+    // if game.state === intro && game.enemy doesn't exist
+        // set game.enemy to selected character
+        // if game.enemy && game.player exist
+            // set game.state to 'fighting'
+});
 
 attackEl.click(function() {
 
-    if ((mainCharacter.hp > 0) && (enemyCharacter.hp > 0)) {
-        mainCharacter.attackEnemy(enemyCharacter);
-    } else {
-        eventsEl.html("<p>GAME OVER!</p>");
-    }
+    if (game.state === "fighting" /*and !(game.player.isDead && game.enemy.isDead)*/) {
+        game.player.attackEnemy(game.enemy);
+    } /*else if game.enemy.isDead() */
+        // set game.state to intermission
+    /* else if game.player.isDead() */
+        // set game.state to game over
 
-
-    render();
+    renderFightSequence();
 }); 
 
-
+resetEl.click(function(){
+    // Take the game back to its initial state
+    game.renderIntro();
+});
 
